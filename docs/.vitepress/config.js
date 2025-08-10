@@ -1,6 +1,7 @@
 export default {
   title: 'AI学习笔记',
   description: '记录AI相关的学习笔记和知识点',
+  base: '/ai-vitepress/',
   themeConfig: {
     logo: '/logo.svg',
     nav: [
