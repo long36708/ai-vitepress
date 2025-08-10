@@ -40,34 +40,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm # 优先使用 npm 缓存（可按锁文件调整）
+          cache: pnpm 
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Install dependencies
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            # 使用 pnpm
-            pnpm install --frozen-lockfile
-          elif [ -f yarn.lock ]; then
-            # 使用 yarn
-            corepack enable
-            yarn install --frozen-lockfile
-          elif [ -f package-lock.json ]; then
-            # 使用 npm（锁文件）
-            npm ci
-          else
-            # 回退到 npm
-            npm install
-          fi
+        run: pnpm install
       - name: Build with VitePress
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            pnpm run docs:build
-          elif [ -f yarn.lock ]; then
-            yarn docs:build
-          else
-            npm run docs:build
-          fi
+        run: pnpm run docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
